@@ -1,0 +1,28 @@
+
+#include <stdio.h>
+
+int main()
+{
+    int house_no, previous, current, units;
+    char category[20];
+
+    printf("Enter House Number: ");
+    scanf("%d", &house_no);
+
+    printf("Enter Category: ");
+    scanf("%19s", category);
+
+    printf("Enter Previous Reading: ");
+    scanf("%d", &previous);
+
+    printf("Enter Current Reading: ");
+    scanf("%d", &current);
+
+    units = current - previous;
+
+    printf("\nHouse Number: %d", house_no);
+    printf("\nCategory: %s", category);
+    printf("\nUnits Consumed: %d\n", units);
+
+    return 0;
+}
