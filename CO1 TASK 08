@@ -1,0 +1,19 @@
+
+#include <stdio.h>
+
+#define RATE 5
+
+int main()
+{
+    int units;
+    int bill;
+
+    printf("Enter Electricity Units: ");
+    scanf("%d", &units);
+
+    bill = units * RATE;
+
+    printf("Total Bill = Rs %d\n", bill);
+
+    return 0;
+}
