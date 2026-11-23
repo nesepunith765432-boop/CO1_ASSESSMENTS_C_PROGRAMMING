@@ -1,0 +1,97 @@
+
+#include <stdio.h>
+
+#define MAX_METER 65535
+#define FIXED_CHARGE 5000L
+
+#define RATE1 0
+#define RATE2 225
+#define RATE3 450
+
+unsigned int get_units(int previous, int current)
+{
+    if (current >= previous)
+        return current - previous;
+
+    if (previous >= 60000 && current <= 1000)
+        return (MAX_METER + 1 - previous) + current;
+
+    return 0;
+}
+
+long calculate_bill(unsigned int units)
+{
+    long bill = FIXED_CHARGE;
+
+    if (units > 200)
+    {
+        bill += 100 * RATE2;
+        bill += (units - 200) * RATE3;
+    }
+    else if (units > 100)
+    {
+        bill += (units - 100) * RATE2;
+    }
+
+    return bill;
+}
+
+int main()
+{
+    int house, previous, current;
+    unsigned int units;
+    char category[20];
+    long bill;
+
+    printf("Enter House Number: ");
+    scanf("%d", &house);
+
+    printf("Enter Category: ");
+    scanf("%19s", category);
+
+    printf("Enter Previous Reading: ");
+    if (scanf("%d", &previous) != 1)
+    {
+        printf("Invalid Input!");
+        return 1;
+    }
+
+    printf("Enter Current Reading: ");
+    if (scanf("%d", &current) != 1)
+    {
+        printf("Invalid Input!");
+        return 1;
+    }
+
+    if (previous < 0 || previous > MAX_METER ||
+        current < 0 || current > MAX_METER)
+    {
+        printf("Invalid Meter Reading!");
+        return 1;
+    }
+
+    if (current < previous &&
+        !(previous >= 60000 && current <= 1000))
+    {
+        printf("Invalid Reading: No Valid Rollover!");
+        return 1;
+    }
+
+    units = get_units(previous, current);
+
+    bill = calculate_bill(units);
+
+    printf("\n----- ELECTRICITY BILL -----\n");
+    printf("House Number: %d\n", house);
+    printf("Category: %s\n", category);
+    printf("Previous Reading: %d\n", previous);
+    printf("Current Reading: %d\n", current);
+    printf("Units Consumed: %u\n", units);
+
+    printf("Fixed Charge: Rs 50.00\n");
+
+    printf("Total Bill: Rs %ld.%02ld\n",
+           bill / 100, bill % 100);
+
+    return 0;
+}
