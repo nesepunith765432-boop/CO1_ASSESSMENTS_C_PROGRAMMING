@@ -1,0 +1,64 @@
+
+#include <stdio.h>
+
+#define PEAK_START 18
+#define PEAK_END 22
+
+int main()
+{
+    long long watt_hours;
+    long long normal_rate = 225;
+    long long peak_rate;
+    long long charge;
+    int hour;
+    int peak;
+
+    FILE *fp = fopen("tariff.txt", "r");
+
+    if (fp != NULL)
+    {
+        if (fscanf(fp, "%lld", &normal_rate) != 1 ||
+            normal_rate < 0)
+        {
+            printf("Invalid tariff file!");
+            fclose(fp);
+            return 1;
+        }
+
+        fclose(fp);
+    }
+
+    peak_rate = normal_rate * 6 / 5;
+
+    printf("Enter Energy Consumed in Wh: ");
+    scanf("%lld", &watt_hours);
+
+    printf("Enter Hour (0-23): ");
+    scanf("%d", &hour);
+
+    if (watt_hours < 0 || hour < 0 || hour > 23)
+    {
+        printf("Invalid Input!");
+        return 1;
+    }
+
+    peak = (hour >= PEAK_START && hour < PEAK_END);
+
+    if (peak)
+    {
+        charge = (watt_hours * peak_rate + 500) / 1000;
+        printf("Peak Time Tariff Applied\n");
+    }
+    else
+    {
+        charge = (watt_hours * normal_rate + 500) / 1000;
+        printf("Normal Tariff Applied\n");
+    }
+
+    printf("Energy: %lld Wh\n", watt_hours);
+
+    printf("Electricity Bill: Rs %lld.%02lld\n",
+           charge / 100, charge % 100);
+
+    return 0;
+}
