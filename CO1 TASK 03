@@ -1,0 +1,50 @@
+
+#include <stdio.h>
+
+#define SLAB1_UNITS 100
+#define SLAB2_UNITS 200
+
+#define RATE1_PAISE 0
+#define RATE2_PAISE 225
+#define RATE3_PAISE 450
+
+#define FIXED_CHARGE_PAISE 5000L
+
+long compute_bill(int units)
+{
+    long paise = FIXED_CHARGE_PAISE;
+
+    if (units > SLAB2_UNITS)
+    {
+        paise += (units - 200) * RATE3_PAISE;
+        paise += 100 * RATE2_PAISE;
+    }
+    else if (units > SLAB1_UNITS)
+    {
+        paise += (units - 100) * RATE2_PAISE;
+    }
+
+    return paise;
+}
+
+int main()
+{
+    int units;
+    long bill;
+
+    printf("Enter Units Consumed: ");
+    scanf("%d", &units);
+
+    if (units < 0)
+    {
+        printf("Invalid Units!");
+        return 1;
+    }
+
+    bill = compute_bill(units);
+
+    printf("Electricity Bill: Rs %ld.%02ld\n",
+           bill / 100, bill % 100);
+
+    return 0;
+}
