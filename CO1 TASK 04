@@ -1,0 +1,26 @@
+
+#include <stdio.h>
+
+#define SQUARE(x) ((x) * (x))
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define TO_PAISE(x) ((x) * 100)
+
+int main()
+{
+    int a, b, rupees;
+
+    printf("Enter First Number: ");
+    scanf("%d", &a);
+
+    printf("Enter Second Number: ");
+    scanf("%d", &b);
+
+    printf("Enter Rupees: ");
+    scanf("%d", &rupees);
+
+    printf("Square of First Number: %d\n", SQUARE(a));
+    printf("Maximum Number: %d\n", MAX(a,b));
+    printf("Amount in Paise: %d\n", TO_PAISE(rupees));
+
+    return 0;
+}
