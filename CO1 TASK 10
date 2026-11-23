@@ -1,0 +1,27 @@
+
+#include <stdio.h>
+
+int main()
+{
+    long long bills, total_paise;
+    double total_rupees;
+
+    printf("Enter Number of Households: ");
+    scanf("%lld", &bills);
+
+    printf("Enter Average Bill in Paise: ");
+    scanf("%lld", &total_paise);
+
+    total_paise = bills * total_paise;
+
+    total_rupees = (double)total_paise / 100.0;
+
+    printf("\nTotal Paise = %lld\n", total_paise);
+    printf("Total Rupees = Rs %.2f\n", total_rupees);
+
+    printf("Size of int = %zu bytes\n", sizeof(int));
+    printf("Size of long = %zu bytes\n", sizeof(long));
+    printf("Size of long long = %zu bytes\n", sizeof(long long));
+
+    return 0;
+}
