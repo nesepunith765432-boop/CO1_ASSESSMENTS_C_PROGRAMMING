@@ -1,0 +1,29 @@
+
+#include <stdio.h>
+#include <limits.h>
+
+typedef unsigned short meter_t;
+
+unsigned int consumption(meter_t previous, meter_t current)
+{
+    return (meter_t)(current - previous);
+}
+
+int main()
+{
+    meter_t previous, current;
+
+    printf("Enter Previous Reading: ");
+    scanf("%hu", &previous);
+
+    printf("Enter Current Reading: ");
+    scanf("%hu", &current);
+
+    printf("Size of Meter: %zu bytes\n", sizeof(meter_t));
+    printf("Maximum Reading: %u\n", (unsigned)USHRT_MAX);
+
+    printf("Units Consumed: %u\n",
+           consumption(previous, current));
+
+    return 0;
+}
