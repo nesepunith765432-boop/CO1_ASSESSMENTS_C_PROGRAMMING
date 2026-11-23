@@ -1,0 +1,42 @@
+
+#include <stdio.h>
+
+#define FIXED 5000L
+#define RATE2 225
+#define RATE3 450
+
+long calculate(int units)
+{
+    long total = FIXED;
+
+    if (units > 200)
+        total += 100 * RATE2 +
+                 (units - 200) * RATE3;
+
+    else if (units > 100)
+        total += (units - 100) * RATE2;
+
+    return total;
+}
+
+int main()
+{
+    int units;
+    long bill;
+
+    printf("Enter Units Consumed: ");
+    scanf("%d", &units);
+
+    if (units < 0)
+    {
+        printf("Invalid Units!");
+        return 1;
+    }
+
+    bill = calculate(units);
+
+    printf("Final Electricity Bill: Rs %ld.%02ld\n",
+           bill / 100, bill % 100);
+
+    return 0;
+}
